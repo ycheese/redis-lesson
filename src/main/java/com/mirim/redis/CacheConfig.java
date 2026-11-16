@@ -10,15 +10,15 @@ import org.springframework.data.redis.serializer.JacksonJsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
 
 @Configuration
-@EnableCaching                                   // "이 앱에서 캐시를 쓰겠다"는 스위치
+// "이 앱에서 캐시를 쓰겠다"는 스위치
+@EnableCaching
 public class CacheConfig {
 
     @Bean
     public RedisCacheConfiguration cacheConfiguration() {
         return RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ofSeconds(30))   // 캐시에는 반드시 유통기한
-                //TODO ②  아래 줄의 // 를 지운다 — 값을 JSON 글자로 저장한다
-                // .serializeValuesWith(SerializationPair.fromSerializer(new JacksonJsonRedisSerializer<>(Product.class)))
+                .serializeValuesWith(SerializationPair.fromSerializer(new JacksonJsonRedisSerializer<>(Product.class)))
                 ;
     }
 }

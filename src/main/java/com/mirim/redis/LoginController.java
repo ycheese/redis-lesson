@@ -16,7 +16,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(@RequestParam String name, HttpSession session) {
-        //TODO ③  세션에 "user"라는 이름으로 name을 넣는다
+        session.setAttribute("user", name);
         return "login ok  user=" + name + "  server=" + port;
     }
 
